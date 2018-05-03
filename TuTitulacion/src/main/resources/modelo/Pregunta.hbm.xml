@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/04/2018 11:24:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Pregunta" table="pregunta" schema="public">
+        <id name="idPregunta" type="int">
+            <column name="id_pregunta" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="contenidoPregunta" type="string">
+            <column name="contenido_pregunta" />
+        </property>
+        <property name="fechaPregunta" type="timestamp">
+            <column name="fecha_pregunta" length="29" />
+        </property>
+        <set name="preguntaDes" table="pregunta_de" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_pregunta" />
+            </key>
+            <one-to-many class="modelo.PreguntaDe" />
+        </set>
+        <set name="comentarioEns" table="comentario_en" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fk_pregunta" />
+            </key>
+            <one-to-many class="modelo.ComentarioEn" />
+        </set>
+    </class>
+</hibernate-mapping>

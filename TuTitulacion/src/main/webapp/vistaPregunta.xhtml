@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Pregunta</title>
+    </head>
+    <ui:composition template="./newTemplate.xhtml">
+        <ui:define name="top">
+            <h:form>
+                <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
+                <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
+            </h:form>
+            <h:link outcome="registrar" value="Registrate" />            
+            <h:link outcome="iniciarSesion" value="Iniciar Sesión" />
+        </ui:define>
+        
+        <ui:define name="body">
+            <h:outputText value="#{controladorComentarioEn.identificadorP}" /><br/>
+            <h:outputText value="#{controladorComentarioEn.titulo}" /> <br/>
+            <!--
+            <h:outputText value="{controladorPregunta.pregunta}" /> <br/>
+            <h:outputText value="{controladorPregunta.preguntaP.idPregunta}" /> <br/>
+            <h:outputText value="{controladorPregunta.preguntaP.contenidoPregunta}" /> <br/>
+            <h:outputText value="{controladorPregunta.contenidoPregunta}" /> <br/>
+            <h:outputText value="{controladorPregunta.fechaPregunta}" /> <br/> 
+            -->
+            <h:inputHidden value="#{controladorComentario.setIdPregunta(controladorComentarioEn.identificadorP)}" />
+            <br/>
+            <p:dataScroller value="#{controladorComentarioEn.comentarios}" var="comentario">
+                <h:outputText value="#{comentario.usuario.nombreUsuario} comentó: " style="font-weight: bold" />
+                <h:outputText value="#{comentario.comentario.contenidoComentario}" style="font-weight: bold" /> <br/>
+                <h:outputText value="#{comentario.comentario.fecha}" style="font-weight: bold" /> <br/>
+                <h:outputText value="#{comentario.pregunta.contenidoPregunta}" style="font-weight: bold" />
+            </p:dataScroller>
+            <br/>
+            <h1>Escribe una respuesta</h1>
+                <h:form>
+                    <h:outputText value="Tu Respuesta: " />
+                    <br/>
+                    <p:inputTextarea value="#{controladorComentario.comentario}"/>
+                    
+                    <br/>     
+                    <p:commandButton value="Responder" action="#{controladorComentario.comentar()}" />
+                                    
+                </h:form>  
+            <h:link outcome="index" value="Atras"/>
+        </ui:define>
+    </ui:composition>  
+</html>

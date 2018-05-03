@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/04/2018 11:24:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.CodigoVerificacionDe" table="codigo_verificacion_de" schema="public" optimistic-lock="version">
+        <id name="idCodigoVerificacion" type="int">
+            <column name="id_codigo_verificacion" />
+            <generator class="identity" />
+        </id>
+        <property name="codigoVerificacion" type="string">
+            <column name="codigo_verificacion" length="6" />
+        </property>
+        <property name="fkUsuario" type="java.lang.Integer">
+            <column name="fk_usuario" />
+        </property>
+    </class>
+</hibernate-mapping>

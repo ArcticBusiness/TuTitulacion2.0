@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Registrar</title>
+            </f:facet>
+        </h:head>
+        <ui:composition template="./newTemplate.xhtml">
+            <ui:define name="top">
+                <h:link outcome="iniciarSesion" value="Iniciar Sesión" />
+            </ui:define>
+            <ui:define name="body">
+                <h:form id="registro_form" enctype="multipart/form-data">
+                    <h:outputText value="*Nombre: " />
+                    <p:inputText value="#{controladorUsuario.nombreUsuario}" id="nombreUsuario"/>
+                    <p:messages for="nombreUsuario" autoUpdate="true" closable="true"/>
+                    <br/>                   
+                    <h:outputText value="*Contraseña: "/>
+                    <p:password value="#{controladorUsuario.contrasenia}" id="pswd1"/>
+                    <p:messages for="pswd1" autoUpdate="true" closable="true"/>
+                    <br/>                
+                    <h:outputText value="*Confirmacion Contraseña: " />
+                    <p:password value="#{controladorUsuario.confirmacionContrasenia}" id="pswd2"/>
+                    <p:messages for="pswd2" autoUpdate="true" closable="true" />
+                    <br/>                
+                    <h:outputText value="*Correo electrónico: " />
+                    <p:inputText value="#{controladorUsuario.correoElectronico}" id="correo"/>
+                    <p:messages for="correo" autoUpdate="true" closable="true"/>
+                    <br/>                
+                    <h:outputText value="Foto de perfil: " />
+                    <p:fileUpload value="#{controladorUsuario.fotoPerfil}" mode="simple" skinSimple="true" label="Escoger foto" id="foto"/>
+                    <p:messages for="foto" autoUpdate="true" closable="true"/>
+                    <br/>
+                    <p:commandButton value="Aceptar" ajax="false" action="#{controladorUsuario.registra()}" />
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </f:view>
+</html>

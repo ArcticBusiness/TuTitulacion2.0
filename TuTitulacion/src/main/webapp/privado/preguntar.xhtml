@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Preguntar</title>
+            </f:facet>
+        </h:head>
+        <ui:composition template="../newTemplate.xhtml">
+            <ui:define name="top">
+                <h:form>
+                    <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
+                    <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
+                </h:form>
+                <h:form>
+                    <p:commandButton value="Cerrar sesión" action="#{loginController.cerrarSesion()}" />
+                </h:form>
+            </ui:define>
+            <ui:define name="body">
+                <h1>Pregunta a la comunidad</h1>
+                <h:form>
+                    <h:outputText value="Tu pregunta: " />
+                    <br/>
+                    <p:inputTextarea value="#{controladorPregunta.contenidoPregunta}"/>                
+                    <br/>                
+                    <p:commandButton value=" Aceptar " action="#{controladorPregunta.preguntar()}" />                
+                </h:form>    
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

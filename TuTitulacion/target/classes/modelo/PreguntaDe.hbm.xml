@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/04/2018 11:24:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.PreguntaDe" table="pregunta_de" schema="public">
+        <id name="idPreguntaDe" type="int">
+            <column name="id_pregunta_de" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="pregunta" class="modelo.Pregunta" fetch="select">
+            <column name="fk_pregunta" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelo.Usuario" fetch="select">
+            <column name="fk_usuario" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

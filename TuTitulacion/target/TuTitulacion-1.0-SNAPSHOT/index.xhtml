@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Tu Titulación</title>
+    </h:head>
+    <ui:composition template="./newTemplate.xhtml">
+        <ui:define name="top">
+            <h:form>
+                <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
+                <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
+            </h:form>
+            <h:link outcome="registrar" value="Registrate     "  />            
+            <h:link outcome="iniciarSesion" value="Iniciar Sesión" />
+        </ui:define>
+        <ui:define name="body">
+            <h1>Temas recientes</h1>
+            <p:dataScroller value="#{controladorPreguntaDe.preguntas}" var="pregunta">
+                <h:outputText value="#{pregunta.usuario.nombreUsuario} preguntó: " style="font-weight: bold" /> 
+                <h:outputText value="#{pregunta.pregunta.contenidoPregunta}" style="font-weight: bold" />
+                <!-- Obtenemos el identificador de la pregunta para pasarselo a la vistaPregunta -->
+                <p:commandButton value="Ver" action="#{controladorComentarioEn.verComentariosEn(pregunta.pregunta.idPregunta,pregunta.pregunta.contenidoPregunta)}"/>
+            </p:dataScroller>
+        </ui:define>
+    </ui:composition>   
+</html>
+

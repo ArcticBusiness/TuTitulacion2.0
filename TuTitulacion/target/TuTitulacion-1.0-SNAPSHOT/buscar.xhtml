@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Buscar</title>
+            </f:facet>  
+        </h:head>
+        <ui:composition template="./newTemplate.xhtml">
+            <ui:define name="top">
+                <h:form>
+                    <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
+                    <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
+                </h:form>
+                <h:link outcome="registrar" value="Registrate" rendered="#{!sessionUtils.haySesion()}"/>  
+                <br/>
+                <h:link outcome="iniciarSesion" value="Iniciar Sesión"  rendered="#{!sessionUtils.haySesion()}"/>
+                <br/>
+                <h:link outcome="privado/preguntar" value="Preguntar" rendered="#{sessionUtils.haySesion()}"/>
+                <br/>
+                <h:form>
+                    <p:commandButton value="Cerrar sesión" action="#{loginController.cerrarSesion()}" rendered="#{sessionUtils.haySesion()}"/>
+                </h:form>
+                <h:link outcome="index" value="Inicio"/>
+            </ui:define>
+            <ui:define name="body">
+                <h1>Resultados</h1>
+                <p:dataScroller value="#{verBuscaPreguntas.preguntas}" var="pregunta" rendered="#{verBuscaPreguntas.resultados == null}" >
+                    <h:outputText value="Contenido: " style="font-weight: bold" />
+                    <h:outputText value="#{pregunta.contenidoPregunta}" style="font-weight: bold" />
+                </p:dataScroller>
+                <p:dataScroller value="#{verBuscaPreguntas.resultados}" var="pregunta" rendered="#{verBuscaPreguntas.resultados != null}" >
+                    <h:outputText value="Contenido: " style="font-weight: bold" />
+                    <h:outputText value="#{pregunta.contenidoPregunta}" style="font-weight: bold" />
+                </p:dataScroller>
+            </ui:define>
+
+        </ui:composition>
+    </f:view>
+</html>
