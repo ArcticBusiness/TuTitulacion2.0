@@ -14,11 +14,7 @@ and open the template in the editor.
         <title>Tu Titulación</title>
     </h:head>
     <ui:composition template="./newTemplate.xhtml">
-        <ui:define name="top">
-            <h:form>
-                <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
-                <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
-            </h:form>            
+        <ui:define name="top">           
         </ui:define>
         <ui:define name="body">
             <h1>Inicia sesión o <h:link outcome="registrar" value="Regístrate" /></h1> 

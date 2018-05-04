@@ -19,14 +19,8 @@ and open the template in the editor.
             </f:facet>
         </h:head>
         <ui:composition template="../newTemplate.xhtml">
-            <ui:define name="top">
-                <h:form>
-                    <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
-                    <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
-                </h:form>
-                <h:form>
-                    <p:commandButton value="Cerrar sesión" action="#{loginController.cerrarSesion()}" />
-                </h:form>
+            <ui:define name="top">                
+                
             </ui:define>
             <ui:define name="body">
                 <h1>Pregunta a la comunidad</h1>

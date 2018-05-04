@@ -22,10 +22,18 @@ public class SessionUtils {
         sesion = getSession();
     }
 
-    public boolean haySesion(){
+    public boolean haySesion() {
         return getSesion().getAttribute("username") != null;
     }
-    
+
+    public boolean esAdmin() {
+        try {
+            return getSesion().getAttribute("username").equals("tutitulacion@gmail.com");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static HttpSession getSession() {
         return (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
@@ -58,6 +66,5 @@ public class SessionUtils {
     public void setSesion(HttpSession sesion) {
         this.sesion = sesion;
     }
-    
-    
+
 }

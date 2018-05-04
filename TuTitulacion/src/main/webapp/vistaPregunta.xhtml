@@ -10,43 +10,29 @@
     </head>
     <ui:composition template="./newTemplate.xhtml">
         <ui:define name="top">
-            <h:form>
-                <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
-                <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
-            </h:form>
-            <h:link outcome="registrar" value="Registrate" />            
-            <h:link outcome="iniciarSesion" value="Iniciar Sesión" />
+
         </ui:define>
-        
         <ui:define name="body">
-            <h:outputText value="#{controladorComentarioEn.identificadorP}" /><br/>
-            <h:outputText value="#{controladorComentarioEn.titulo}" /> <br/>
-            <!--
-            <h:outputText value="{controladorPregunta.pregunta}" /> <br/>
-            <h:outputText value="{controladorPregunta.preguntaP.idPregunta}" /> <br/>
-            <h:outputText value="{controladorPregunta.preguntaP.contenidoPregunta}" /> <br/>
-            <h:outputText value="{controladorPregunta.contenidoPregunta}" /> <br/>
-            <h:outputText value="{controladorPregunta.fechaPregunta}" /> <br/> 
-            -->
+            <h:outputText value="#{controladorComentarioEn.titulo}" /> <br/>            
             <h:inputHidden value="#{controladorComentario.setIdPregunta(controladorComentarioEn.identificadorP)}" />
             <br/>
+            <h:outputText value="#{comentario.pregunta.contenidoPregunta}" style="font-weight: bold" />
             <p:dataScroller value="#{controladorComentarioEn.comentarios}" var="comentario">
                 <h:outputText value="#{comentario.usuario.nombreUsuario} comentó: " style="font-weight: bold" />
                 <h:outputText value="#{comentario.comentario.contenidoComentario}" style="font-weight: bold" /> <br/>
                 <h:outputText value="#{comentario.comentario.fecha}" style="font-weight: bold" /> <br/>
-                <h:outputText value="#{comentario.pregunta.contenidoPregunta}" style="font-weight: bold" />
             </p:dataScroller>
             <br/>
             <h1>Escribe una respuesta</h1>
-                <h:form>
-                    <h:outputText value="Tu Respuesta: " />
-                    <br/>
-                    <p:inputTextarea value="#{controladorComentario.comentario}"/>
-                    
-                    <br/>     
-                    <p:commandButton value="Responder" action="#{controladorComentario.comentar()}" />
-                                    
-                </h:form>  
+            <h:form>
+                <h:outputText value="Tu Respuesta: " />
+                <br/>
+                <p:inputTextarea value="#{controladorComentario.comentario}" rendered="#{sessionUtils.haySesion()}"/>                    
+                <br/>     
+                <p:commandButton value="Responder" action="#{controladorComentario.comentar()}" rendered="#{sessionUtils.haySesion()}"/>                                    
+            </h:form>  
+            <h:outputText value="Para poder responder " rendered="#{!sessionUtils.haySesion()}"/><h:link outcome="iniciarSesion" value="Inicia sesión"  rendered="#{!sessionUtils.haySesion()}"/><h:link outcome="registrar" value=" o Registrate"  rendered="#{!sessionUtils.haySesion()}"/>
+            <br/>
             <h:link outcome="index" value="Atras"/>
         </ui:define>
     </ui:composition>  

@@ -10,12 +10,7 @@
     </h:head>
     <ui:composition template="./newTemplate.xhtml">
         <ui:define name="top">
-            <h:form>
-                <p:inputText value="#{verBuscaPreguntas.search}" placeholder="Busca en el foro"/>                
-                <p:commandButton value=" Buscar " action="#{verBuscaPreguntas.busca()}" />
-            </h:form>
-            <h:link outcome="registrar" value="Registrate     "  />            
-            <h:link outcome="iniciarSesion" value="Iniciar Sesión" />
+            
         </ui:define>
         <ui:define name="body">
             <h1>Temas recientes</h1>
