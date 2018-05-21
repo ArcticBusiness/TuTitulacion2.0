@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -145,4 +146,57 @@ public class UsuarioDAO {
         }
         return u;
     }
+    
+     /**
+     * Regresa una lista con todos los Usuarios que esten activas en la base de datos.
+     * @return 
+     */
+    public List<Usuario> mostrarUsuarios() {
+        List<Usuario> result = null;
+        // arbrimos la sesion son sessionFactory 
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            //iniciamos la transaccion, la consulta a realizar
+            tx = session.beginTransaction();
+            //Escribimos la consulta en HQL
+            String hql = "from Usuario";
+            Query query = session.createQuery(hql);
+            result = (List<Usuario>)query.list();
+            tx.commit();
+        }
+        catch (Exception e) {
+            //si hay un problema regresamos la base aun estado antes de la consulta
+            if (tx!=null){
+                tx.rollback();
+           }
+           e.printStackTrace(); 
+        }finally {
+            //cerramos la session
+            session.close();
+        }
+        return result;
+    }
+    
+    /**
+     * 
+     * @param cvd 
+     */
+    public void elimina(Usuario u) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(u);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
 }

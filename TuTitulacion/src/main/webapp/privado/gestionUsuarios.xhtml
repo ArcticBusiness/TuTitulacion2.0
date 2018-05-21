@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Gestionar Usuarios</title>
+    </h:head>
+    <ui:composition template="../newTemplate.xhtml">
+        <ui:define name="top">
+        </ui:define>
+        <ui:define name="body">
+            <h1>Usuarios:</h1>
+            <p:dataScroller value="#{controladorAdmin.usuarios}" var="usuario">
+                <h:outputText value="Email: #{usuario.correoElectronico}" style="font-weight: bold" /> 
+                <br/>
+                <h:outputText value="Nombre: #{usuario.nombreUsuario}" style="font-weight: bold" /> 
+                <br/>
+                <p:commandButton value="Eliminar" action="#{controladorAdmin.eliminaUsuario(usuario.correoElectronico)}"/>
+                <br/>
+                <br/>
+            </p:dataScroller>
+        </ui:define>
+    </ui:composition>   
+</html>

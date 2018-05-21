@@ -122,5 +122,26 @@ public class PreguntaDAO {
         return result;
     }
     
+        /**
+     *
+     * @param cvd
+     */
+    public void elimina(Pregunta cvd) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(cvd);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
     
 }

@@ -21,12 +21,12 @@
             </h:form>
             <h:link outcome="registrar" value="Registrate" rendered="#{!sessionUtils.haySesion()}" />            
             <h:link outcome="iniciarSesion" value="Iniciar Sesión" rendered="#{!sessionUtils.haySesion()}"/>
-            <h:link outcome="iniciarSesion" value="Gestionar Cuentas" rendered="#{sessionUtils.esAdmin()}"/>            
+            <h:link outcome="/privado/gestionUsuarios" value="Gestionar Cuentas" rendered="#{sessionUtils.esAdmin()}"/>            
             <h:link outcome="iniciarSesion" value="Gestionar Contenido" rendered="#{sessionUtils.esAdmin()}"/>
+            <h:link outcome="/privado/preguntar" value="Preguntar" rendered="#{sessionUtils.haySesion()}"/>            
             <h:form>
                 <p:commandButton value="Cerrar sesión" action="#{loginController.cerrarSesion()}" rendered="#{sessionUtils.haySesion()}"/>
             </h:form>
-
             <ui:insert name="top">Top</ui:insert>
         </div>
 

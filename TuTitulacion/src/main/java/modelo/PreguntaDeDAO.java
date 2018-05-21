@@ -77,5 +77,50 @@ public class PreguntaDeDAO {
         return result;
     }
     
+     /**
+     *
+     * @param email
+     * @return
+     */
+    public PreguntaDe getPreguntaDeByIdUsuario(int id) {
+        PreguntaDe u = null;
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String hql = "from PreguntaDe as pde where pde.usuario.idUsuario = " + id;
+            Query query = session.createQuery(hql);
+            u = (PreguntaDe) query.uniqueResult();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return u;
+    }
+    
+    /**
+     * 
+     * @param cvd 
+     */
+    public void elimina(PreguntaDe cvd) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.delete(cvd);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
     
 }
